@@ -1,9 +1,7 @@
 class Timer {
     timer = (minutes=10) => {
         this.startAt = Date.now();
-        if (Notification.permission !== "granted") {
-            throw 'No permission';
-        }
+        this._checkPermission();
         console.log(`timer start at:${new Date()}`);
         this.timeout = setTimeout(this.finish, minutes * 60 * 1000);
     }
@@ -34,6 +32,7 @@ class Timer {
     }
 
     alarm = (at) => {
+        this._checkPermission();
         if (!at) {
             throw 'Alarm: No time';
         }
@@ -49,6 +48,12 @@ class Timer {
 
     stopA  = () => {
         clearTimeout(this.alarmer);
+    }
+
+    _checkPermission = () => {
+        if (Notification.permission !== "granted") {
+            throw 'No permission';
+        }
     }
 };
 let _t = new Timer();
