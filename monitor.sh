@@ -38,7 +38,7 @@ while true; do
     free_mem_check=$(echo "$free_mem < $max" | bc -l 2>&1)
     if [[ "$cpu_idle_check" == "1" || "$free_mem_check" == "1" ]]; then
         output_head "$top_output" "$cpu_idle" "$free_mem"
-        if [["$cpu_idle_check" == "1"]]; then
+        if [[ "$cpu_idle_check" == "1" ]]; then
             output_tail_cpu
         else
             output_tail_mem
